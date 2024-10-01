@@ -112,7 +112,7 @@ class HttpRequest {
 	property response;
 	
 	/**
-	 * レスポンス｡読み込み専用
+	 * レスポンス。読み込み専用
 	 * @return レスポンスデータ(octet)
 	 */
 	property responseData;
