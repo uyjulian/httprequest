@@ -3,13 +3,8 @@
 #include <regex>
 
 typedef std::basic_string<TCHAR> tstring;
-#if 1
 typedef std::basic_regex<TCHAR> tregex;
 typedef std::match_results<tstring::const_iterator> tmatch;
-#else
-typedef std::tr1::basic_regex<TCHAR> tregex;
-typedef std::tr1::match_results<tstring::const_iterator> tmatch;
-#endif
 
 // Content-Type メタタグをマッチングする正規表現。大文字小文字は無視
 static tregex regctype(_T("<meta[ \\t]+http-equiv=(\\\"content-type\\\"|'content-type'|content-type)[ \\t]+content=(\\\"[^\\\"]*\\\"|'[^']*'|[^ \\t>]+).*>"), tregex::icase);
@@ -23,12 +18,7 @@ bool
 matchContentType(tstring &text, tstring &ctype)
 {
 	tmatch result;
-#if 1
-	if (std::regex_search(text, result, regctype))
-#else
-	if (std::tr1::regex_search(text, result, regctype))
-#endif
-	{
+	if (std::regex_search(text, result, regctype)) {
 		tstring str = result.str(2);
 		int len = str.size();
 		const TCHAR *buf = str.c_str();
